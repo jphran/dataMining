@@ -14,9 +14,28 @@
 ## part 1, Birthday paradox
 import random
 import numpy as np
-n = 5000
+import matplotlib as plt
 
 # A, I will be using ints
-rand = random.randint(0,n)
-print(rand)
+def randomCollision():
+    k = 0
+    n = 5000
+    collisionArr = np.zeros(n,)
+    while 1:
+        rand = random.randint(0,n-1)
+        if collisionArr[rand] == 1:
+            break
+        collisionArr[rand] = 1
+        k += 1
+    return k
+
+
+print('part A, k: ', randomCollision())
+
+# B, 
+m = 300
+collisionResults = np.zeros(m,)
+
+for i in range(m):
+    collisionResults[i] = randomCollision()
 
