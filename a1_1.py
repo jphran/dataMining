@@ -53,7 +53,7 @@ fractions = np.zeros(m)
 collisions = 0
 for i in range(m):
     while collisionResults[collisions] <= i:
-        if collisions < 299:
+        if collisions < m-1:
             collisions += 1
         else: 
             break
@@ -90,3 +90,12 @@ print('expected number of k for a collision:', np.sum(collisionResults)/m)
 
 # print(nTime)
 
+
+## for part A
+# total = 0
+# for i in range(100):
+#     total += randomCollision(5000)
+
+# total = total/100
+
+# print('total: ', total)

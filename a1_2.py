@@ -16,6 +16,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 from collections import Counter
+import time
 
 n = 300
 def fillRange(n):
@@ -29,30 +30,89 @@ def fillRange(n):
             break
     return k
 
-
-print('k: ', fillRange(n))
+# total = 0
+# for i in range(100):
+#     total += fillRange(300)
+# print('k: ', total/100)
 
 ## B
-m = 400 
-kArr = np.zeros((m,))
+m = 400
+def runTrials(n, m):
+    kArr = np.zeros((m,))
 
-for i in range(m):
-    kArr[i] = fillRange(n)
+    for i in range(m):
+        kArr[i] = fillRange(n)
+
+    return kArr
+
+kArr = np.sort(runTrials(n,m))
+
+# countArr = np.zeros((int(max(kArr)), int(min(kArr))))
+
+# collisions = 0
+# idx = 0
+# for i in range(int(max(kArr)), int(min(kArr))):
+#     while kArr[collisions] <= i:
+#         if collisions < m-1:
+#             collisions += 1
+#         else: 
+#             break
+#     if collisions == 0:
+#         countArr[idx] = 0
+#     else:
+#         countArr[idx] = collisions/m
+#     idx += 1
+
+# plt.figure(1)
+# print(countArr)
+# print(max(kArr), '\t', min(kArr))
 
 
 #create hist
-values, base = np.histogram(kArr, bins=40)
+values, base = np.histogram(runTrials(n,m), bins=m)
 #evaluate the cumulative
 cumulative = np.cumsum(values)
 # plot the cumulative function
+plt.figure(1)
 plt.title('Cumulative Density Funciton, Coupon Collector, Justin Francis')
 plt.ylabel('Fraction of Experiemental Success')
 plt.xlabel('Trials, k')
-plt.plot(base[:-1], cumulative/m, 'o')
+plt.plot(kArr, cumulative/m, 'o')
 plt.show()
 
 ## C
-empiricalEst = np.sum(kArr)/m
+empiricalEst = np.sum(runTrials(n,m))/m
 print('Empirical Est: ', empiricalEst)
 
 ##D
+# Describe how you implemented this experiment and how long it took 
+# forn= 300andm= 400trials.Show a plot of the run time as you gradually 
+# increase the parametersnandm. (For at least 3 fixed valuesofmbetween
+# 400and5,000, plot the time as a function ofn.) You should be able to 
+# reachn= 20,000andm= 5,000
+
+# mArr = np.linspace(40, 50, 3)
+# nArr = np.linspace(30, 50, 3)
+# timeArr = np.zeros((len(mArr), len(nArr)))
+
+# for i in range(len(mArr)):
+#     for j in range(len(nArr)):
+#         tStart = time.time()
+#         runTrials(int(mArr[i]),int(nArr[j]))
+#         tStop = time.time()
+#         tElp = tStop - tStart
+#         print(tElp)
+#         timeArr[i, j] = tElp
+
+# plt.figure(2)
+# plt.title('Run Time, Coupon Collector, Justin Francis')
+# plt.xlabel('Time, t[s]')
+# plt.ylabel('Size of Range, n[number of elem]')
+# # plt.hold()
+# x = timeArr[0,:]
+# y = nArr
+# plt.plot(x,y, 'r', label='m = 300')
+# plt.plot(timeArr[1,:],y, 'b', label='m = 400')
+# plt.plot(timeArr[2,:],y, 'g', label='m = 500')
+# plt.legend()
+# plt.show()
