@@ -91,8 +91,8 @@ print('Empirical Est: ', empiricalEst)
 # 400and5,000, plot the time as a function ofn.) You should be able to 
 # reachn= 20,000andm= 5,000
 
-# mArr = np.linspace(40, 50, 3)
-# nArr = np.linspace(30, 50, 3)
+# mArr = np.linspace(400, 5000, 3)
+# nArr = np.linspace(300, 20000, 3)
 # timeArr = np.zeros((len(mArr), len(nArr)))
 
 # for i in range(len(mArr)):
